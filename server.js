@@ -16,10 +16,10 @@ io.on('connection', function (socket) {
         
         // server sends message out to all clients
         
-		io.emit('message', message); // now sends to all clients + sender (socket.broadcast = all clients NOT sender)
+		io.emit('message', message); 
 	});
 
-    // server sends message to message sender
+    // server sends message upon first message received
     
 	socket.emit('message', {
 		text: 'Welcome to the chat application!'
