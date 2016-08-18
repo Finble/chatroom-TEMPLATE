@@ -7,10 +7,11 @@ socket.on('connect', function () {
 // listens to message from server.js
 
 socket.on('message', function (message) {
+    var momentTimestamp = moment.utc(message.timestamp);  // adds in timestamp
 	console.log('New message:');
 	console.log(message.text);
     
-    jQuery('.messages').append('<p>' + message.text + '</p>'); // targeting by id = #, targeting by class = .  
+    jQuery('.messages').append('<p><strong>' + momentTimestamp.local().format('h:mm a') + ':  </strong>' + message.text + '</p>'); // targeting by id = #, targeting by class = .  
 });
 
 // sends message to server.js

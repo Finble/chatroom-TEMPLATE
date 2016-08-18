@@ -1,4 +1,5 @@
 var PORT = process.env.PORT || 3000;
+var moment = require('moment');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -15,14 +16,15 @@ io.on('connection', function (socket) {
 		console.log('Message received: ' + message.text);
         
         // server sends message out to all clients
-        
+        message.timestamp = moment().valueOf(); // add timestamp
 		io.emit('message', message); 
 	});
 
     // server sends message upon first message received
     
 	socket.emit('message', {
-		text: 'Welcome to the chat application!'
+		text: 'Welcome to the chat application!',
+        timestamp: moment().valueOf()
 	});
 });
 
