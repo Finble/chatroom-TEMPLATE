@@ -4,9 +4,7 @@ var socket = io();
 
 console.log(name + ' wants to join ' + room);
 
-jQuery('.room-title').text(room); // select room field
-
-// connects to sockets
+jQuery('.room-title').text(room); 
 
 socket.on('connect', function () {
 	console.log('Connected to socket.io server!');    
@@ -15,8 +13,6 @@ socket.on('connect', function () {
         room: room
     });
 });
-
-// listens to message from server.js
 
 socket.on('message', function (message) {
     var momentTimestamp = moment.utc(message.timestamp);  
@@ -28,8 +24,6 @@ socket.on('message', function (message) {
     $message.append('<p><strong>' + message.name + ' ' + momentTimestamp.local().format('h:mm a') + '</strong></p>');
     $message.append('<p>' + message.text + '</p>');
 });
-
-// sends message to server.js
 
 var $form = jQuery('#message-form');  
 

@@ -9,18 +9,16 @@ app.use(express.static(__dirname + '/public'));
 
 var clientInfo = {}; 
 
-// sends current users to provided socket
-
 function sendCurrentUsers(socket) {
     var info = clientInfo[socket.id];
     var users = [];
     
     if (typeof info === 'undefined') {
-        return;  // ensures we only search for rooms that exists, or stops function running
+        return;  
     }
     
     Object.keys(clientInfo).forEach(function (socketId) {
-        var userInfo = clientInfo[socket.id]; // where is socketId defined?
+        var userInfo = clientInfo[socketId]; 
         
         if (info.room === userInfo.room) {
             users.push(userInfo.name);
@@ -29,16 +27,13 @@ function sendCurrentUsers(socket) {
     
     socket.emit('message', {
         name: 'System',
-        text: 'Current users: ' + users.join(', '), // join takes every element in an array and pushes together, with ' ' in between
+        text: 'Current users: ' + users.join(', '), 
         timestamp: moment().valueOf()
     });
 }
 
-
 io.on('connection', function (socket) {   
 	console.log('User connected via socket.io!');
-    
-    // leave room
     
     socket.on('disconnect', function() {
         var userData = clientInfo[socket.id];
@@ -54,8 +49,6 @@ io.on('connection', function (socket) {
        } 
     });
     
-    // join room
-    
     socket.on('joinRoom', function(req) {
         clientInfo[socket.id] = req; 
         socket.join(req.room);  
@@ -65,25 +58,18 @@ io.on('connection', function (socket) {
             timestamp: moment().valueOf()
         });
     });
-
-    // server listens + receives message
     
 	socket.on('message', function (message) {
 		console.log('Message received: ' + message.text);
         
-        // add current user command, so can see all users in a room at any point in time
-        
-        if (message.text === '@currentUsers') {  // if user doesn't run custom command...
+        if (message.text === '@currentUsers') {  
             sendCurrentUsers(socket);
-            
-            // server sends message out to all clients        
+                  
         } else {
             message.timestamp = moment().valueOf();
             io.to(clientInfo[socket.id].room).emit('message', message);
         }
 	});
-    
-    // server sends message upon first message received
     
 	socket.emit('message', {
         name: 'System',  
