@@ -16,7 +16,7 @@ io.on('connection', function (socket) {
         
         // server sends message out to all clients
         
-		socket.broadcast.emit('message', message);
+		io.emit('message', message); // now sends to all clients + sender (socket.broadcast = all clients NOT sender)
 	});
 
     // server sends message to message sender

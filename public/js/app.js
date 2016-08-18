@@ -9,6 +9,8 @@ socket.on('connect', function () {
 socket.on('message', function (message) {
 	console.log('New message:');
 	console.log(message.text);
+    
+    jQuery('.messages').append('<p>' + message.text + '</p>'); // targeting by id = #, targeting by class = .  
 });
 
 // sends message to server.js
