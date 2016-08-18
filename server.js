@@ -16,7 +16,7 @@ io.on('connection', function (socket) {
 		console.log('Message received: ' + message.text);
         
         // server sends message out to all clients
-        message.timestamp = moment().valueOf(); // add timestamp
+        message.timestamp = moment().valueOf(); 
 		io.emit('message', message); 
 	});
 
