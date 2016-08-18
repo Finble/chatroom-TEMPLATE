@@ -23,6 +23,7 @@ io.on('connection', function (socket) {
     // server sends message upon first message received
     
 	socket.emit('message', {
+        name: 'System',  // added for query params
 		text: 'Welcome to the chat application!',
         timestamp: moment().valueOf()
 	});
