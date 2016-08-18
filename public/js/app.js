@@ -1,5 +1,5 @@
-var name = getQueryVariable('name') || 'Anonymous';  // automatically picks up name (as put into URL)
-var room = getQueryVariable('room');  // automatically picks up room (as put into URL)
+var name = getQueryVariable('name') || 'Anonymous';  
+var room = getQueryVariable('room');  
 var socket = io();
 
 console.log(name + ' wants to join ' + room); 
@@ -9,6 +9,8 @@ socket.on('connect', function () {
 });
 
 // listens to message from server.js
+
+jQuery('.room-title').text(room); // select room field
 
 socket.on('message', function (message) {
     var momentTimestamp = moment.utc(message.timestamp);  
@@ -31,8 +33,8 @@ $form.on('submit', function(event){
 	var $message = $form.find('input[name=message]'); 
     
     socket.emit('message', {
-        name: name,  // prints out name to all clients, so ALL can read
-        text: $message.val() // print message.text to all clients, so ALL can read
+        name: name,  
+        text: $message.val() 
     });
 
 	$message.val(''); 
