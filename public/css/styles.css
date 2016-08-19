@@ -5,4 +5,10 @@
     align-items: center;
 }
 
-/* creating own css styles above, centers whole col + box into center of page (vs center of top)
+h1 {
+    margin: 24px 0; /* 24px = above + below, o = left + right */
+}
+
+.messages p {
+    margin: 6px 0;
+}
