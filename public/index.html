@@ -3,21 +3,37 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Socket.io Basics</title>
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
 	</head>
 	<body>
-        <h1>Join Chat</h1>
+
         
-        <form action="/chat.html">  
-            <label>Display Name</label>
-            <input type="text" name="name"/>  
-            
-            <label>Room Name</label>
-            <input type="text" name="room"/>  
-            
-            <input type="submit" value="Join chat"/> 
-        </form>
-	
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <h1>Join Chat</h1>
+                    
+                    <form action="/chat.html"> 
+                        <div class="form-group">
+                            <label>Display Name</label>
+                            <input type="text" name="name" class="form-control"/>      
+                        </div>
+
+                        <div class="form-group">
+                            <label>Room Name</label>
+                            <input type="text" name="room" class="form-control"/>  
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Join chat" class="btn btn-primary"/> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
+
+<!-- Bootstrap form-group allows for label and fields to be formatted -->
 
 
